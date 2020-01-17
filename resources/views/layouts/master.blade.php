@@ -16,10 +16,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script src="//kit.fontawesome.com/e0611c552d.js" crossorigin="anonymous"></script>
+  <!-- <script src="//kit.fontawesome.com/e0611c552d.js" crossorigin="anonymous"></script> -->
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="app">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-tachometer-alt blue"></i>
               <p>
                 Dashboard
                 <span class="right badge badge-danger">New</span>
@@ -81,8 +81,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-cog"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog green"></i>
               <p>
                 Management
                 <i class="right fas fa-angle-left"></i>
@@ -90,22 +90,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
+                <router-link to="/users" class="nav-link active">
+                  <i class="fas fa-users nav-icon purple"></i>
+                  <p>Users</p>
+                </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
-              <i class="nav-icon fas fa-user-alt"></i>
+              <i class="nav-icon fas fa-user-alt orange"></i>
               <p>
                 Profile
                 <span class="right badge badge-danger">New</span>
@@ -113,13 +107,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </router-link>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-power-off"></i>
-              <p>
-                Logout
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
+              <a class="nav-link" href="{{ route('logout') }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                  <i class="nav-icon fas fa-power-off red"></i>
+                  <p>
+                    {{ __('Logout') }}
+                    <span class="right badge badge-danger">New</span>
+                  </p>
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+              </form>
           </li>
         </ul>
       </nav>
@@ -129,7 +129,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div id="app" class="content-wrapper">
+  <div class="content-wrapper">
 
     <!-- Main content -->
     <div class="content">
